@@ -1,0 +1,1 @@
+Set this URL as the webhook endpoint in your PayzCore project settings. All transfer notifications will be sent here.

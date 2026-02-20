@@ -1,0 +1,1 @@
+Default stablecoin token. Customers can choose between USDT and USDC at checkout. Note: USDC is not available on TRC20 (Tron).
