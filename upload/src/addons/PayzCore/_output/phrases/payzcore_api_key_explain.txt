@@ -1,0 +1,1 @@
+Your PayzCore project API key (pk_live_xxx). Find this in the PayzCore dashboard under Projects.

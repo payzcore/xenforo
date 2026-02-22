@@ -1,0 +1,1 @@
+Select the stablecoin token to monitor. Note: USDC is not available on TRC20.

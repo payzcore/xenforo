@@ -1,0 +1,1 @@
+Time window in minutes for the user to complete the transfer. Range: 10-1440 (default: 60).

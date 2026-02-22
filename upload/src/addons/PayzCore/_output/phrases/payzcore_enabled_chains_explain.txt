@@ -1,0 +1,1 @@
+Select which blockchain networks customers can choose from. Your PayzCore project must have wallets configured for each enabled network. If only one network is selected, customers will not see the network selector.

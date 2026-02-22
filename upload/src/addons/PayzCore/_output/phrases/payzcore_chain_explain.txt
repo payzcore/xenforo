@@ -1,0 +1,1 @@
+Select the blockchain network for stablecoin monitoring. Polygon and Arbitrum have the lowest fees. TRC20 (Tron) is the most widely supported.
