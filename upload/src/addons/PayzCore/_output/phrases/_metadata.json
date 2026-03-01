@@ -1,0 +1,242 @@
+{
+    "payzcore_api_url.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_api_url_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_api_key.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_api_key_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_api_key_required.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_webhook_secret.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_webhook_secret_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_webhook_secret_required.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_expiry_minutes.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_expiry_minutes_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_connection_status.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_callback_url.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_callback_url_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_payment_title.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_select_network.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_select_network_to_pay.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_select_token.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_trc20_usdc_not_supported.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_continue_to_payment.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_creating_payment.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_send_exact_amount.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_deposit_address.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_click_to_copy.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_amount_copied.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_address_copied.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_qr_code_alt.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_status.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_waiting_for_transfer.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_transfer_detected.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_transfer_confirmed.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_partial_transfer.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_monitoring_expired.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_cancelled.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_time_remaining.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_network_warning.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_submit_tx_hash.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_submit_confirm.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_monitoring_request_failed.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_connection_retrying.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_enter_tx_hash.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_expired.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_send_remaining.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_invalid_tx_hash.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_submitting.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_tx_hash_submitted.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_submission_failed.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_network_error.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    },
+    "payzcore_request_timeout.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0"
+    }
+}

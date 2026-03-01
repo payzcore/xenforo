@@ -1,0 +1,22 @@
+{
+    "legacy_addon_id": "",
+    "title": "PayzCore - Stablecoin Monitoring",
+    "description": "Blockchain transaction monitoring integration for XenForo user upgrades. Watches for incoming USDT/USDC transfers on TRC20, BEP20, ERC20, Polygon, and Arbitrum networks. Non-custodial — does not hold, transmit, or custody any funds.",
+    "version_id": 1000070,
+    "version_string": "1.0.0",
+    "dev": "PayzCore",
+    "dev_url": "https://payzcore.com",
+    "faq_url": "https://docs.payzcore.com",
+    "support_url": "https://payzcore.com",
+    "extra_urls": {
+        "Documentation": "https://docs.payzcore.com",
+        "Dashboard": "https://app.payzcore.com"
+    },
+    "require": {
+        "XF": [
+            2020070,
+            "XenForo 2.2.0+"
+        ]
+    },
+    "icon": ""
+}

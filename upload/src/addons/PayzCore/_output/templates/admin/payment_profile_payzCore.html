@@ -1,0 +1,46 @@
+<xf:textboxrow name="options[api_url]" value="{$profile.options.api_url}"
+    label="{{ phrase('payzcore_api_url') }}"
+    explain="{{ phrase('payzcore_api_url_explain') }}"
+    placeholder="https://api.payzcore.com" />
+
+<xf:textboxrow name="options[api_key]" value="{$profile.options.api_key}"
+    label="{{ phrase('payzcore_api_key') }}"
+    explain="{{ phrase('payzcore_api_key_explain') }}"
+    placeholder="pk_live_..."
+    type="password" />
+
+<xf:textboxrow name="options[webhook_secret]" value="{$profile.options.webhook_secret}"
+    label="{{ phrase('payzcore_webhook_secret') }}"
+    explain="{{ phrase('payzcore_webhook_secret_explain') }}"
+    type="password" />
+
+<xf:textboxrow name="options[expiry_minutes]" value="{$profile.options.expiry_minutes}"
+    label="{{ phrase('payzcore_expiry_minutes') }}"
+    explain="{{ phrase('payzcore_expiry_minutes_explain') }}"
+    placeholder="60" />
+
+<xf:formrow label="{{ phrase('payzcore_connection_status') }}"
+    explain="Networks and tokens are fetched automatically from PayzCore API. Save this form to sync.">
+    <xf:if is="$profile.options.cached_networks && count($profile.options.cached_networks) > 0">
+        <div class="block-body" style="padding: 10px; background: #e8f5e9; border: 1px solid #4caf50; border-radius: 4px;">
+            <strong style="color: #2e7d32;">&#10004; Connected</strong><br />
+            Networks: {{ implode(', ', $profile.options.cached_networks) }}<br />
+            Default token: {{ $profile.options.cached_default_token ?: 'USDT' }}<br />
+            <xf:if is="$profile.options.cached_at">
+                <small>Last synced: {{ $profile.options.cached_at }} &mdash; Save again to refresh</small>
+            </xf:if>
+        </div>
+    <xf:else />
+        <div class="block-body" style="padding: 10px; background: #fff3e0; border: 1px solid #ff9800; border-radius: 4px;">
+            <strong style="color: #e65100;">&#9888; Not synced</strong><br />
+            Enter your API key above and save to fetch network configuration from PayzCore.
+        </div>
+    </xf:if>
+</xf:formrow>
+
+<xf:formrow label="{{ phrase('payzcore_callback_url') }}"
+    explain="{{ phrase('payzcore_callback_url_explain') }}">
+    <div class="inputGroup">
+        <xf:textbox value="{$xf.options.boardUrl}/payment_callback.php?_xfProvider=payzCore" readonly="true" />
+    </div>
+</xf:formrow>

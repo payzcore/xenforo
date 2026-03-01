@@ -1,0 +1,1 @@
+Invalid transaction hash. Must be 10-128 hexadecimal characters.

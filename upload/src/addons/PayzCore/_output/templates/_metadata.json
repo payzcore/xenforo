@@ -1,0 +1,12 @@
+{
+    "admin/payment_profile_payzCore.html": {
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "type": "admin"
+    },
+    "public/payzcore_payment.html": {
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "type": "public"
+    }
+}

@@ -1,0 +1,993 @@
+<xf:title>{{ phrase('payzcore_payment_title') }}</xf:title>
+
+<style>
+    .payzcore-container {
+        max-width: 480px;
+        margin: 20px auto;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .payzcore-card {
+        background: #09090b;
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px;
+        padding: 28px;
+        color: #e4e4e7;
+    }
+    .payzcore-badge {
+        display: inline-block;
+        background: rgba(6,182,212,0.1);
+        border: 1px solid rgba(6,182,212,0.2);
+        border-radius: 20px;
+        padding: 4px 14px;
+        font-size: 12px;
+        color: #06b6d4;
+        margin-bottom: 12px;
+    }
+    .payzcore-amount {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+    }
+    .payzcore-amount .payzcore-token {
+        color: #06b6d4;
+    }
+    .payzcore-subtitle {
+        font-size: 13px;
+        color: #71717a;
+        margin-top: 4px;
+    }
+    .payzcore-qr {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .payzcore-qr img {
+        width: 200px;
+        height: 200px;
+        border-radius: 8px;
+        background: #000;
+    }
+    .payzcore-label {
+        font-size: 11px;
+        color: #71717a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+    }
+    .payzcore-address-box {
+        background: #000000;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 12px 44px 12px 14px;
+        font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+        font-size: 13px;
+        word-break: break-all;
+        color: #ffffff;
+        cursor: pointer;
+        position: relative;
+        transition: border-color 0.15s;
+    }
+    .payzcore-address-box:hover {
+        border-color: rgba(6,182,212,0.4);
+    }
+    .payzcore-copy-icon {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #71717a;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .payzcore-copy-icon:hover {
+        color: #06b6d4;
+    }
+    .payzcore-copy-feedback {
+        font-size: 11px;
+        color: #06b6d4;
+        margin-top: 4px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .payzcore-status-area {
+        background: #000000;
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 20px;
+    }
+    .payzcore-status-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .payzcore-status-text {
+        font-size: 12px;
+        color: #71717a;
+    }
+    .payzcore-status-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #f59e0b;
+        margin-top: 2px;
+    }
+    .payzcore-spinner {
+        width: 24px;
+        height: 24px;
+        border: 2px solid rgba(6,182,212,0.2);
+        border-top-color: #06b6d4;
+        border-radius: 50%;
+        animation: payzcore-spin 0.8s linear infinite;
+    }
+    .payzcore-countdown {
+        font-size: 22px;
+        font-weight: 700;
+        color: #06b6d4;
+        font-variant-numeric: tabular-nums;
+    }
+    .payzcore-warning {
+        text-align: center;
+        font-size: 11px;
+        color: #52525b;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        padding-top: 16px;
+        margin-top: 8px;
+    }
+    .payzcore-success-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
+        color: #06b6d4;
+    }
+    .payzcore-explorer-link {
+        color: #06b6d4;
+        text-decoration: underline;
+        font-size: 12px;
+        word-break: break-all;
+    }
+    @keyframes payzcore-spin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Network selector styles */
+    .payzcore-selector-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 4px;
+    }
+    .payzcore-selector-subtitle {
+        font-size: 13px;
+        color: #71717a;
+        margin-bottom: 20px;
+    }
+    .payzcore-selector-label {
+        font-size: 11px;
+        color: #71717a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+    .payzcore-network-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .payzcore-network-option {
+        display: none;
+    }
+    .payzcore-network-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        background: #000000;
+        border: 2px solid rgba(255,255,255,0.07);
+        border-radius: 10px;
+        padding: 14px 10px;
+        cursor: pointer;
+        transition: border-color 0.15s, background 0.15s;
+        text-align: center;
+    }
+    .payzcore-network-label:hover {
+        border-color: rgba(6,182,212,0.3);
+        background: rgba(6,182,212,0.03);
+    }
+    .payzcore-network-option:checked + .payzcore-network-label {
+        border-color: #06b6d4;
+        background: rgba(6,182,212,0.08);
+    }
+    .payzcore-network-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+    .payzcore-network-desc {
+        font-size: 11px;
+        color: #71717a;
+    }
+    .payzcore-token-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .payzcore-token-option {
+        display: none;
+    }
+    .payzcore-token-label {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #000000;
+        border: 2px solid rgba(255,255,255,0.07);
+        border-radius: 10px;
+        padding: 12px;
+        cursor: pointer;
+        transition: border-color 0.15s, background 0.15s;
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+    .payzcore-token-label:hover {
+        border-color: rgba(6,182,212,0.3);
+        background: rgba(6,182,212,0.03);
+    }
+    .payzcore-token-option:checked + .payzcore-token-label {
+        border-color: #06b6d4;
+        background: rgba(6,182,212,0.08);
+    }
+    .payzcore-token-label.payzcore-disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    .payzcore-continue-btn {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: #06b6d4;
+        color: #000000;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+    .payzcore-continue-btn:hover {
+        background: #22d3ee;
+    }
+    .payzcore-continue-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+    .payzcore-amount-preview {
+        text-align: center;
+        margin-bottom: 24px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .payzcore-amount-preview-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+    .payzcore-amount-preview-label {
+        font-size: 13px;
+        color: #71717a;
+        margin-top: 2px;
+    }
+    .payzcore-usdc-note {
+        font-size: 11px;
+        color: #71717a;
+        text-align: center;
+        margin-top: -12px;
+        margin-bottom: 16px;
+        display: none;
+    }
+    .payzcore-amount-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .payzcore-copy-amount-btn {
+        background: rgba(6,182,212,0.1);
+        border: 1px solid rgba(6,182,212,0.2);
+        border-radius: 6px;
+        padding: 4px 8px;
+        cursor: pointer;
+        color: #71717a;
+        font-size: 14px;
+        transition: color 0.15s, border-color 0.15s;
+        line-height: 1;
+    }
+    .payzcore-copy-amount-btn:hover {
+        color: #06b6d4;
+        border-color: rgba(6,182,212,0.4);
+    }
+    .payzcore-amount-copy-feedback {
+        font-size: 11px;
+        color: #06b6d4;
+        margin-top: 4px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .payzcore-poll-warning {
+        font-size: 11px;
+        color: #f59e0b;
+        text-align: center;
+        margin-top: 6px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .payzcore-txid-form {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .payzcore-txid-input {
+        width: 100%;
+        background: #000000;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+        font-size: 12px;
+        color: #ffffff;
+        outline: none;
+        transition: border-color 0.15s;
+        box-sizing: border-box;
+    }
+    .payzcore-txid-input:focus {
+        border-color: rgba(6,182,212,0.4);
+    }
+    .payzcore-txid-input:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+    .payzcore-txid-btn {
+        display: block;
+        width: 100%;
+        margin-top: 8px;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: rgba(6,182,212,0.15);
+        color: #06b6d4;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+    .payzcore-txid-btn:hover {
+        background: rgba(6,182,212,0.25);
+    }
+    .payzcore-txid-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+    .payzcore-txid-error {
+        font-size: 11px;
+        color: #ef4444;
+        margin-top: 4px;
+    }
+    .payzcore-txid-success {
+        font-size: 11px;
+        color: #06b6d4;
+        margin-top: 4px;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 480px) {
+        .payzcore-container {
+            margin: 8px auto;
+        }
+        .payzcore-card {
+            padding: 16px;
+            border-radius: 8px;
+        }
+        .payzcore-amount {
+            font-size: 22px;
+        }
+        .payzcore-amount-preview-value {
+            font-size: 26px;
+        }
+        .payzcore-network-grid {
+            grid-template-columns: 1fr;
+        }
+        .payzcore-qr img {
+            width: 160px;
+            height: 160px;
+        }
+        .payzcore-countdown {
+            font-size: 18px;
+        }
+        .payzcore-address-box {
+            font-size: 11px;
+            padding: 10px 38px 10px 10px;
+        }
+        .payzcore-selector-title {
+            font-size: 16px;
+        }
+        .payzcore-label {
+            font-size: 10px;
+        }
+        .payzcore-warning {
+            font-size: 10px;
+        }
+    }
+</style>
+
+<div class="payzcore-container">
+    <div class="payzcore-card">
+        <xf:if is="{$showNetworkSelector}">
+            <!-- Step 1: Network & Token Selector -->
+            <div class="payzcore-amount-preview">
+                <div class="payzcore-amount-preview-value">${$costAmount}</div>
+                <div class="payzcore-amount-preview-label">{{ phrase('payzcore_select_network_to_pay') }}</div>
+            </div>
+
+            <div class="payzcore-selector-label">{{ phrase('payzcore_select_network') }}</div>
+            <div class="payzcore-network-grid" id="payzcore-network-grid">
+                <xf:foreach loop="$enabledNetworks" value="$networkOption">
+                    <input type="radio" name="payzcore_network" value="{$networkOption.code}"
+                        class="payzcore-network-option" id="payzcore-network-{$networkOption.code}"
+                        {{ if $networkOption.code == $defaultNetwork }}checked="checked"{{ /if }} />
+                    <label for="payzcore-network-{$networkOption.code}" class="payzcore-network-label">
+                        <span class="payzcore-network-name">{$networkOption.name}</span>
+                        <span class="payzcore-network-desc">{$networkOption.desc}</span>
+                    </label>
+                </xf:foreach>
+            </div>
+
+            <xf:if is="{$showTokenSelector}">
+                <div class="payzcore-selector-label">{{ phrase('payzcore_select_token') }}</div>
+                <div class="payzcore-token-row" id="payzcore-token-row">
+                    <input type="radio" name="payzcore_token" value="USDT"
+                        class="payzcore-token-option" id="payzcore-token-USDT"
+                        {{ if $defaultToken == 'USDT' }}checked="checked"{{ /if }} />
+                    <label for="payzcore-token-USDT" class="payzcore-token-label" id="payzcore-token-label-USDT">USDT</label>
+
+                    <input type="radio" name="payzcore_token" value="USDC"
+                        class="payzcore-token-option" id="payzcore-token-USDC"
+                        {{ if $defaultToken == 'USDC' }}checked="checked"{{ /if }} />
+                    <label for="payzcore-token-USDC" class="payzcore-token-label" id="payzcore-token-label-USDC">USDC</label>
+                </div>
+                <div class="payzcore-usdc-note" id="payzcore-usdc-note">
+                    {{ phrase('payzcore_trc20_usdc_not_supported') }}
+                </div>
+            </xf:if>
+
+            <button type="button" class="payzcore-continue-btn" id="payzcore-continue-btn"
+                onclick="payzCoreStartPayment()">
+                {{ phrase('payzcore_continue_to_payment') }}
+            </button>
+
+            <!-- Hidden: loading state replaces selector -->
+            <div id="payzcore-loading" style="display:none; text-align:center; padding:40px 0;">
+                <div class="payzcore-spinner" style="margin:0 auto 16px;"></div>
+                <div style="color:#71717a; font-size:13px;">{{ phrase('payzcore_creating_payment') }}</div>
+            </div>
+
+        <xf:else />
+            <!-- Step 2: Payment UI (address, QR, countdown) -->
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div class="payzcore-badge">
+                    {$networkLabel}
+                </div>
+                <div class="payzcore-amount-row">
+                    <div class="payzcore-amount">
+                        {$payment.amount} <span class="payzcore-token">{$token}</span>
+                    </div>
+                    <button type="button" class="payzcore-copy-amount-btn" onclick="payzCoreCopyAmount()"
+                        title="{{ phrase('payzcore_click_to_copy') }}">&#x2398;</button>
+                </div>
+                <div class="payzcore-amount-copy-feedback" id="payzcore-amount-copy-feedback">
+                    {{ phrase('payzcore_amount_copied') }}
+                </div>
+                <div class="payzcore-subtitle">
+                    {{ phrase('payzcore_send_exact_amount') }}
+                </div>
+            </div>
+
+            <!-- QR Code -->
+            <xf:if is="{$payment.qr_code}">
+                <div class="payzcore-qr">
+                    <img src="{$payment.qr_code}" alt="{{ phrase('payzcore_qr_code_alt') }}" />
+                </div>
+            </xf:if>
+
+            <!-- Deposit Address -->
+            <div style="margin-bottom: 20px;">
+                <div class="payzcore-label">
+                    {{ phrase('payzcore_deposit_address') }}
+                </div>
+                <div class="payzcore-address-box" id="payzcore-address-box"
+                     onclick="payzCoreCopyAddress()" title="{{ phrase('payzcore_click_to_copy') }}">
+                    {$payment.address}
+                    <span class="payzcore-copy-icon" id="payzcore-copy-icon">&#x2398;</span>
+                </div>
+                <div class="payzcore-copy-feedback" id="payzcore-copy-feedback">
+                    {{ phrase('payzcore_address_copied') }}
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="payzcore-status-area">
+                <div class="payzcore-status-row">
+                    <div>
+                        <div class="payzcore-status-text">{{ phrase('payzcore_status') }}</div>
+                        <div class="payzcore-status-label" id="payzcore-status-label">
+                            {{ phrase('payzcore_waiting_for_transfer') }}
+                        </div>
+                    </div>
+                    <div class="payzcore-spinner" id="payzcore-spinner"></div>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div style="text-align: center; margin-bottom: 12px;">
+                <div class="payzcore-label">
+                    {{ phrase('payzcore_time_remaining') }}
+                </div>
+                <div class="payzcore-countdown" id="payzcore-countdown">
+                    --:--
+                </div>
+            </div>
+
+            <!-- Poll connection warning -->
+            <div class="payzcore-poll-warning" id="payzcore-poll-warning">
+                {{ phrase('payzcore_connection_retrying') }}
+            </div>
+
+            <!-- TX Hash submission (pool+txid mode) -->
+            <xf:if is="{$showTxidForm}">
+                <div class="payzcore-txid-form" id="payzcore-txid-form">
+                    <div class="payzcore-label">{{ phrase('payzcore_submit_tx_hash') }}</div>
+                    <input type="text" class="payzcore-txid-input" id="payzcore-txid-input"
+                        placeholder="{{ phrase('payzcore_enter_tx_hash') }}" maxlength="128" />
+                    <button type="button" class="payzcore-txid-btn" id="payzcore-txid-btn"
+                        onclick="payzCoreSubmitTxHash()">
+                        {{ phrase('payzcore_submit_confirm') }}
+                    </button>
+                    <div class="payzcore-txid-error" id="payzcore-txid-error" style="display:none;"></div>
+                    <div class="payzcore-txid-success" id="payzcore-txid-success" style="display:none;"></div>
+                </div>
+            </xf:if>
+
+            <!-- Warning -->
+            <div class="payzcore-warning">
+                {{ phrase('payzcore_network_warning', {'token': $token, 'network': $networkLabel}) }}
+            </div>
+        </xf:if>
+    </div>
+</div>
+
+<xf:if is="{$showNetworkSelector}">
+<xf:js>
+(function() {
+    var createUrl   = '{$createPaymentUrl|escape:js}';
+    var csrfToken   = XF.config.csrf;
+    var showTokens  = {{ if $showTokenSelector }}true{{ else }}false{{ /if }};
+    var defaultToken = '{$defaultToken|escape:js}';
+
+    // Network info for USDC availability
+    var networkNoUsdc = { 'TRC20': true };
+
+    function getSelectedNetwork() {
+        var radios = document.querySelectorAll('input[name="payzcore_network"]');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) return radios[i].value;
+        }
+        return '';
+    }
+
+    function getSelectedToken() {
+        if (!showTokens) return defaultToken;
+        var radios = document.querySelectorAll('input[name="payzcore_token"]');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) return radios[i].value;
+        }
+        return 'USDT';
+    }
+
+    // Handle network selection -> disable USDC for TRC20
+    function updateTokenAvailability() {
+        if (!showTokens) return;
+        var network = getSelectedNetwork();
+        var usdcLabel = document.getElementById('payzcore-token-label-USDC');
+        var usdcRadio = document.getElementById('payzcore-token-USDC');
+        var usdcNote  = document.getElementById('payzcore-usdc-note');
+
+        if (networkNoUsdc[network]) {
+            // Disable USDC, force USDT
+            if (usdcLabel) usdcLabel.classList.add('payzcore-disabled');
+            if (usdcRadio) usdcRadio.disabled = true;
+            if (usdcNote) usdcNote.style.display = 'block';
+            // If USDC was selected, switch to USDT
+            if (usdcRadio && usdcRadio.checked) {
+                usdcRadio.checked = false;
+                var usdtRadio = document.getElementById('payzcore-token-USDT');
+                if (usdtRadio) usdtRadio.checked = true;
+            }
+        } else {
+            if (usdcLabel) usdcLabel.classList.remove('payzcore-disabled');
+            if (usdcRadio) usdcRadio.disabled = false;
+            if (usdcNote) usdcNote.style.display = 'none';
+        }
+    }
+
+    // Attach network change listeners
+    var networkRadios = document.querySelectorAll('input[name="payzcore_network"]');
+    for (var i = 0; i < networkRadios.length; i++) {
+        networkRadios[i].addEventListener('change', updateTokenAvailability);
+    }
+
+    // Initial check
+    updateTokenAvailability();
+
+    // Start payment button handler
+    window.payzCoreStartPayment = function() {
+        var network = getSelectedNetwork();
+        var token = getSelectedToken();
+
+        if (!network) return;
+
+        // Hide selector, show loading
+        var grid = document.getElementById('payzcore-network-grid');
+        var tokenRow = document.getElementById('payzcore-token-row');
+        var usdcNote = document.getElementById('payzcore-usdc-note');
+        var btn = document.getElementById('payzcore-continue-btn');
+        var loading = document.getElementById('payzcore-loading');
+        var labels = document.querySelectorAll('.payzcore-selector-label');
+
+        if (grid) grid.style.display = 'none';
+        if (tokenRow) tokenRow.style.display = 'none';
+        if (usdcNote) usdcNote.style.display = 'none';
+        if (btn) btn.style.display = 'none';
+        for (var i = 0; i < labels.length; i++) labels[i].style.display = 'none';
+        if (loading) loading.style.display = 'block';
+
+        // Submit form to create payment with selected network/token
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = createUrl;
+        form.style.display = 'none';
+
+        var networkInput = document.createElement('input');
+        networkInput.type = 'hidden';
+        networkInput.name = 'payzcore_network';
+        networkInput.value = network;
+        form.appendChild(networkInput);
+
+        var tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = 'payzcore_token';
+        tokenInput.value = token;
+        form.appendChild(tokenInput);
+
+        var csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_xfToken';
+        csrfInput.value = csrfToken;
+        form.appendChild(csrfInput);
+
+        document.body.appendChild(form);
+        form.submit();
+    };
+})();
+</xf:js>
+
+<xf:else />
+
+<xf:js>
+(function() {
+    var paymentId  = '{$payment.id|escape:js}';
+    var expiresAt  = new Date('{$payment.expires_at|escape:js}').getTime();
+    var pollUrl    = '{$pollUrl|escape:js}';
+    var address    = '{$payment.address|escape:js}';
+    var amountStr  = '{$payment.amount|escape:js}';
+    var tokenName  = '{$token|escape:js}';
+    var pollTimer  = null;
+    var countTimer = null;
+    var pollFailCount = 0;
+    var timerExpired  = false;
+
+    // Helper: copy text to clipboard
+    function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text);
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch(e) {}
+            document.body.removeChild(ta);
+        }
+    }
+
+    // Copy address to clipboard
+    window.payzCoreCopyAddress = function() {
+        copyToClipboard(address);
+        var fb = document.getElementById('payzcore-copy-feedback');
+        if (fb) {
+            fb.style.opacity = '1';
+            setTimeout(function() { fb.style.opacity = '0'; }, 3000);
+        }
+    };
+
+    // Copy amount to clipboard
+    window.payzCoreCopyAmount = function() {
+        copyToClipboard(amountStr);
+        var fb = document.getElementById('payzcore-amount-copy-feedback');
+        if (fb) {
+            fb.style.opacity = '1';
+            setTimeout(function() { fb.style.opacity = '0'; }, 3000);
+        }
+    };
+
+    // Pad single-digit numbers
+    function pad(n) {
+        return n < 10 ? '0' + n : '' + n;
+    }
+
+    // Disable txid form when timer expires
+    function disableTxidForm() {
+        var txInput = document.getElementById('payzcore-txid-input');
+        var txBtn   = document.getElementById('payzcore-txid-btn');
+        if (txInput) txInput.disabled = true;
+        if (txBtn) txBtn.disabled = true;
+    }
+
+    // Countdown timer
+    function updateCountdown() {
+        var now  = Date.now();
+        var diff = Math.max(0, Math.floor((expiresAt - now) / 1000));
+        var el   = document.getElementById('payzcore-countdown');
+        if (!el) return;
+
+        if (diff <= 0) {
+            el.textContent = '{{ phrase('payzcore_expired') }}';
+            el.style.color = '#ef4444';
+            timerExpired = true;
+            clearInterval(countTimer);
+            updateStatus('expired', '{{ phrase('payzcore_monitoring_expired') }}');
+            clearInterval(pollTimer);
+            disableTxidForm();
+            return;
+        }
+
+        var h = Math.floor(diff / 3600);
+        var m = Math.floor((diff % 3600) / 60);
+        var s = diff % 60;
+
+        if (h > 0) {
+            el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+        } else {
+            el.textContent = pad(m) + ':' + pad(s);
+        }
+
+        // Turn red when less than 5 minutes
+        if (diff < 300) {
+            el.style.color = '#ef4444';
+        }
+    }
+
+    // Show/hide poll connection warning
+    function updatePollWarning(show) {
+        var el = document.getElementById('payzcore-poll-warning');
+        if (el) {
+            el.style.opacity = show ? '1' : '0';
+        }
+    }
+
+    // Update status display
+    function updateStatus(status, label) {
+        var el = document.getElementById('payzcore-status-label');
+        var sp = document.getElementById('payzcore-spinner');
+        if (!el) return;
+
+        var colors = {
+            'pending':    '#f59e0b',
+            'confirming': '#3b82f6',
+            'partial':    '#f59e0b',
+            'paid':       '#06b6d4',
+            'overpaid':   '#06b6d4',
+            'expired':    '#ef4444',
+            'cancelled':  '#ef4444'
+        };
+
+        el.textContent = label || status;
+        el.style.color = colors[status] || '#71717a';
+
+        if (sp) {
+            var finalStates = ['paid', 'overpaid', 'expired', 'cancelled'];
+            if (finalStates.indexOf(status) !== -1) {
+                sp.style.display = 'none';
+            }
+        }
+    }
+
+    // Handle poll failure tracking
+    function onPollFail() {
+        pollFailCount++;
+        if (pollFailCount >= 3) {
+            updatePollWarning(true);
+        }
+    }
+
+    function onPollSuccess() {
+        pollFailCount = 0;
+        updatePollWarning(false);
+    }
+
+    // Poll for payment status
+    function pollStatus() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', pollUrl, true);
+        xhr.timeout = 15000;
+
+        xhr.onload = function() {
+            if (xhr.status !== 200) {
+                onPollFail();
+                return;
+            }
+
+            try {
+                var data = JSON.parse(xhr.responseText);
+                if (!data.success || !data.payment) {
+                    onPollFail();
+                    return;
+                }
+
+                onPollSuccess();
+                var p = data.payment;
+
+                switch (p.status) {
+                    case 'pending':
+                        updateStatus('pending', '{{ phrase('payzcore_waiting_for_transfer') }}');
+                        break;
+                    case 'confirming':
+                        updateStatus('confirming', '{{ phrase('payzcore_transfer_detected') }}');
+                        break;
+                    case 'partial':
+                        updateStatus('partial', '{{ phrase('payzcore_partial_transfer') }} (' + p.paid_amount + ' ' + tokenName + ') \u2014 {{ phrase('payzcore_send_remaining') }}');
+                        break;
+                    case 'paid':
+                        updateStatus('paid', '{{ phrase('payzcore_transfer_confirmed') }}');
+                        clearInterval(pollTimer);
+                        clearInterval(countTimer);
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 3000);
+                        break;
+                    case 'overpaid':
+                        updateStatus('overpaid', '{{ phrase('payzcore_transfer_confirmed') }}');
+                        clearInterval(pollTimer);
+                        clearInterval(countTimer);
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 3000);
+                        break;
+                    case 'expired':
+                        updateStatus('expired', '{{ phrase('payzcore_monitoring_expired') }}');
+                        clearInterval(pollTimer);
+                        disableTxidForm();
+                        break;
+                    case 'cancelled':
+                        updateStatus('cancelled', '{{ phrase('payzcore_cancelled') }}');
+                        clearInterval(pollTimer);
+                        break;
+                }
+            } catch (e) {
+                onPollFail();
+            }
+        };
+
+        xhr.onerror = function() { onPollFail(); };
+        xhr.ontimeout = function() { onPollFail(); };
+        xhr.send();
+    }
+
+    // TX Hash submission with client-side validation
+    window.payzCoreSubmitTxHash = function() {
+        var input    = document.getElementById('payzcore-txid-input');
+        var errorEl  = document.getElementById('payzcore-txid-error');
+        var successEl = document.getElementById('payzcore-txid-success');
+        var btn      = document.getElementById('payzcore-txid-btn');
+
+        if (!input || !btn) return;
+        if (timerExpired) return;
+
+        var txHash = input.value.trim();
+
+        // Hide previous messages
+        if (errorEl) { errorEl.style.display = 'none'; errorEl.textContent = ''; }
+        if (successEl) { successEl.style.display = 'none'; successEl.textContent = ''; }
+
+        // Client-side hex validation: 10-128 hex characters
+        var hexPattern = /^[a-fA-F0-9]{10,128}$/;
+        if (!hexPattern.test(txHash)) {
+            if (errorEl) {
+                errorEl.textContent = '{{ phrase("payzcore_invalid_tx_hash") }}';
+                errorEl.style.display = 'block';
+            }
+            return;
+        }
+
+        // Disable form during submission
+        input.disabled = true;
+        btn.disabled = true;
+        btn.textContent = '{{ phrase("payzcore_submitting") }}';
+
+        var confirmUrl = {$confirmEndpoint|json} || pollUrl.replace('_xfAction=poll', '_xfAction=confirm');
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', confirmUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.timeout = 15000;
+
+        xhr.onload = function() {
+            btn.textContent = '{{ phrase("payzcore_submit_confirm") }}';
+            if (xhr.status >= 200 && xhr.status < 300) {
+                if (successEl) {
+                    successEl.textContent = '{{ phrase("payzcore_tx_hash_submitted") }}';
+                    successEl.style.display = 'block';
+                }
+                input.disabled = true;
+                btn.disabled = true;
+            } else {
+                input.disabled = false;
+                btn.disabled = false;
+                if (errorEl) {
+                    try {
+                        var resp = JSON.parse(xhr.responseText);
+                        errorEl.textContent = resp.error || '{{ phrase("payzcore_submission_failed") }}';
+                    } catch(e) {
+                        errorEl.textContent = '{{ phrase("payzcore_submission_failed") }}';
+                    }
+                    errorEl.style.display = 'block';
+                }
+            }
+        };
+
+        xhr.onerror = function() {
+            btn.textContent = '{{ phrase("payzcore_submit_confirm") }}';
+            input.disabled = false;
+            btn.disabled = false;
+            if (errorEl) {
+                errorEl.textContent = '{{ phrase("payzcore_network_error") }}';
+                errorEl.style.display = 'block';
+            }
+        };
+
+        xhr.ontimeout = function() {
+            btn.textContent = '{{ phrase("payzcore_submit_confirm") }}';
+            input.disabled = false;
+            btn.disabled = false;
+            if (errorEl) {
+                errorEl.textContent = '{{ phrase("payzcore_request_timeout") }}';
+                errorEl.style.display = 'block';
+            }
+        };
+
+        xhr.send(JSON.stringify({ tx_hash: txHash }));
+    };
+
+    // Initialize
+    updateCountdown();
+    countTimer = setInterval(updateCountdown, 1000);
+    pollTimer  = setInterval(pollStatus, 15000);
+
+    // First poll after 5 seconds
+    setTimeout(pollStatus, 5000);
+})();
+</xf:js>
+</xf:if>

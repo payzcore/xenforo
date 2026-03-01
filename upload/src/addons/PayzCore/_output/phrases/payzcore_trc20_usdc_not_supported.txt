@@ -1,0 +1,1 @@
+USDC is not available on TRC20 (Tron). Token has been set to USDT. Select a different network to use USDC.
