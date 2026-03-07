@@ -18,7 +18,7 @@
  * @copyright  2026 PayzCore
  * @license    MIT
  * @link       https://payzcore.com
- * @version    1.0.0
+ * @version    1.0.1
  */
 
 namespace PayzCore\Payment;
@@ -35,7 +35,7 @@ class PayzCore extends AbstractProvider
     /**
      * User-agent string for API requests.
      */
-    const USER_AGENT = 'PayzCore-XenForo/1.0.0';
+    const USER_AGENT = 'PayzCore-XenForo/1.0.1';
 
     /**
      * HTTP request timeout in seconds.

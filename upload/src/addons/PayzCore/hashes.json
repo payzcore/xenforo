@@ -1,7 +1,7 @@
 {
-    "Payment/PayzCore.php": "90beb12b1dfbf54ae8284375304ac870",
+    "Payment/PayzCore.php": "56e6d281524cb4b343e4e1edcbb41355",
     "Setup.php": "3e47ca4178136420109cd78c27d511cb",
-    "_output/phrases/_metadata.json": "1bb56348746294051ea1f41272d19fa2",
+    "_output/phrases/_metadata.json": "f00fb30a02cabe989fb04e31188ca155",
     "_output/phrases/payzcore_address_copied.txt": "17d8085bb17b07027a7a9fb17bdad8f2",
     "_output/phrases/payzcore_amount_copied.txt": "65e562d129a30f42fd8f5086684d51cd",
     "_output/phrases/payzcore_api_key.txt": "d876ff8da67c3731ae25d8335a4168b4",
@@ -50,8 +50,8 @@
     "_output/phrases/payzcore_webhook_secret.txt": "3abf098c55c8c952e889ae62e9dc7b99",
     "_output/phrases/payzcore_webhook_secret_explain.txt": "efc521230b81786f1155cf7ae3317de8",
     "_output/phrases/payzcore_webhook_secret_required.txt": "a006329486a028ccfd684970310362cb",
-    "_output/templates/_metadata.json": "adc408987b39ddaaac7c377916a973ab",
+    "_output/templates/_metadata.json": "12e6d6cd3c3b8c076e14ecf034b6897a",
     "_output/templates/admin/payment_profile_payzCore.html": "043e06a096ca8a6b3f64365dbd623ff0",
-    "_output/templates/public/payzcore_payment.html": "251b6e44a14a8fb0b1660d50b13f4f84",
-    "addon.json": "bbb3d73404c08a8e8ebc46f4d0f88b6c"
+    "_output/templates/public/payzcore_payment.html": "40a988f84ed8feee590d111c93a23453",
+    "addon.json": "091ca0200a98c1f46bbf8a95a95189c0"
 }
