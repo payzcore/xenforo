@@ -1,5 +1,7 @@
 # PayzCore for XenForo 2
 
+[![XenForo Resources](https://img.shields.io/badge/XenForo-Resources-blue)](https://xenforo.com/community/resources/payzcore-accept-usdt-usdc-crypto-payments.10307/) [![Docs](https://img.shields.io/badge/Docs-docs.payzcore.com-cyan)](https://docs.payzcore.com/integrations/xenforo)
+
 Blockchain transaction monitoring integration for XenForo 2 user upgrades. Accept stablecoin payments (USDT/USDC) on multiple networks (TRC20, BEP20, ERC20, Polygon, Arbitrum) for premium memberships.
 
 PayzCore is a **non-custodial** monitoring API -- it watches blockchain addresses for incoming transfers and notifies your XenForo installation via webhooks. It does not hold, transmit, or custody any funds.
